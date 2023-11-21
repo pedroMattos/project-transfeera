@@ -20,7 +20,7 @@ const navLinks = computed(() => {
 
 <style lang="scss" scoped>
     nav {
-        height: 50px;
+        min-height: var(--header-height);
         padding: 17px 50px 0;
         background-color: var(--green-300);
         a {

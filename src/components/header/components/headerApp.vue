@@ -6,7 +6,7 @@
 
 <style lang="scss" scoped>
   header {
-    height: 50px;
+    min-height: var(--header-height);
     padding: 10px 50px;
     background-color: white;
   }  
