@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
-import layout from '@/shared-components/mainLayout/mainLayout.vue'
+import HeaderApp from '@/components/header/index.vue'
 </script>
 
 <template>
-  <layout>
-    <RouterView />
-  </layout>
+  <section class="main-app">
+    <header-app /> 
+    <slot></slot>
+  </section>
 </template>
 
 <style lang="scss" scoped>
