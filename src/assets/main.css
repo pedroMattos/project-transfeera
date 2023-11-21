@@ -30,7 +30,18 @@
   --red-200: #FF3569;
   --red-300: #FF003A;
   --red-400: #CB0026;
+  --red-450: #FC1E38;
   --red-500: #870017;
+
+  --header-height: 50px;
+  --margin-favoreds: 45px;
+  --button-height: 41px;
+  --header-total: calc(var(--header-height) * 2);
+  --margin-total: calc(var(--margin-favoreds) * 2);
+  --header-with-margins: calc(var(--margin-total) + var(--header-total));
+  --total-with-button: calc(var(--button-height) + var(--header-with-margins));
+  --section-height: calc(100vh - var(--total-with-button));
+
 }
 
 body {
