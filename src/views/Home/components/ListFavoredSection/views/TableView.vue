@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import TableDataDto from '../dtos/table_data.dto';
+import PaginationTable from '@/shared-components/paginationTable/paginationTable.vue'
 
 const tableData = new TableDataDto({
       "id": "0accb825-db24-4288-9f29-c88b9ec656da",
@@ -31,8 +32,7 @@ const TABLE_HEADER_TITLES = ['Favorecido', 'CPF/CNPJ', 'Banco', 'Agência', 'CC'
       </tr>
     </thead>
     <tbody>
-      <tr
-      >
+      <tr>
         <td>{{ tableData.name }}</td>
         <td>{{ tableData.uniqueIdentifyPFPJ }}</td>
         <td>{{ tableData.bank }}</td>
@@ -42,4 +42,34 @@ const TABLE_HEADER_TITLES = ['Favorecido', 'CPF/CNPJ', 'Banco', 'Agência', 'CC'
       </tr>
     </tbody>
   </v-table>
+
+  <pagination-table :pages="1" @page-change="console.log" />
+  <p class="center">
+    <img src="../../../../../assets/transfeera-logo-mini.png">
+  </p>
 </template>
+
+<style lang="scss" scoped>
+.v-table {
+  margin-top: 39px;
+  th.text-left {
+    color: var(--gray-400);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  tr td {
+    color: var(--gray-500);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+  }
+}
+
+.center {
+  text-align: center;
+  margin: 40px 0 0 0;
+}
+</style>
