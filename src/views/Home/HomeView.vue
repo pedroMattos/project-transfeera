@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import SearchInput from '@/shared-components/searchInput/SearchInput.vue'
+import SectionView from './components/ListFavoredSection/views/SectionView.vue'
 </script>
 
 <template>
   <main>
-    <section>
+    <section class="favored-section">
       <div class="favoreds">
         <h1>Seus Favorecidos</h1>
         <v-btn icon>
@@ -13,13 +14,15 @@ import SearchInput from '@/shared-components/searchInput/SearchInput.vue'
       </div>
       <search-input placeholder="Nome, CPF, agência ou conta" />
     </section>
+
+    <section-view />
   </main>
 </template>
 
 <style lang="scss" scoped>
   main {
     flex: 1;
-    section {
+    section.favored-section {
       display: flex;
       align-items: center;
     }
@@ -33,7 +36,7 @@ import SearchInput from '@/shared-components/searchInput/SearchInput.vue'
     .favoreds {
       display: flex;
       align-items: center;
-      margin: 45px 0 42px 44px;
+      margin: var(--margin-favoreds) 0 var(--margin-favoreds) 44px;
       gap: 3px;
       flex: 1;
       button {
@@ -41,7 +44,7 @@ import SearchInput from '@/shared-components/searchInput/SearchInput.vue'
         color: white;
         &.v-btn--icon {
           width: 41px;
-          height: 41px;
+          height: var(--button-height);
         }
       }
     }
