@@ -1,0 +1,1 @@
+export type Theme = 'warn' | 'outlined' | 'primary' | 'danger'
