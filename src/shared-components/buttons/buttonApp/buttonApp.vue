@@ -17,10 +17,15 @@ const viewModel = new ButtonViewModel()
 
 <style lang="scss" scoped>
   .v-btn {
-    color: white;
-    height: 50px;
+    color: #FFF;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding: 17px 15px;
     &.warn-btn {
       background-color: var(--red-100);
+      height: unset;
     }
   }
 </style>
