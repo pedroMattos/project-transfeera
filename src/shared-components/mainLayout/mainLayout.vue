@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import HeaderApp from '@/components/header/index.vue'
+import CreateFavoredModal from '@/components/modals/createFavored/createFavored.vue'
 </script>
 
 <template>
   <section class="main-app">
     <header-app /> 
     <slot></slot>
+
+    <create-favored-modal />
   </section>
 </template>
 
