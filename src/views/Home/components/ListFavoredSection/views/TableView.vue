@@ -10,7 +10,7 @@ const TABLE_HEADER_TITLES = ['Favorecido', 'CPF/CNPJ', 'Banco', 'Agência', 'CC'
 </script>
 
 <template>
-  <v-table density="compact">
+  <v-table density="compact" hover>
     <thead>
       <tr>
         <th v-for="(title, index) in TABLE_HEADER_TITLES" :key="index" class="text-left">
@@ -52,7 +52,21 @@ const TABLE_HEADER_TITLES = ['Favorecido', 'CPF/CNPJ', 'Banco', 'Agência', 'CC'
     font-style: normal;
     font-weight: 300;
     line-height: normal;
+    cursor: pointer;
+    user-select: none;
   }
+}
+
+.v-table .v-table__wrapper > table > thead > tr > th {
+  border-bottom: 1px solid transparent;
+}
+
+.v-table .v-table__wrapper > table > tbody > tr:not(:last-child) > td, .v-table .v-table__wrapper > table > tbody > tr:not(:last-child) > th {
+  border-bottom: 1px solid transparent;
+}
+
+.v-table > .v-table__wrapper > table > tbody > tr > td, .v-table > .v-table__wrapper > table > tbody > tr > th, .v-table > .v-table__wrapper > table > thead > tr > td, .v-table > .v-table__wrapper > table > thead > tr > th, .v-table > .v-table__wrapper > table > tfoot > tr > td, .v-table > .v-table__wrapper > table > tfoot > tr > th {
+  padding: 15px 16px;
 }
 
 .center {
