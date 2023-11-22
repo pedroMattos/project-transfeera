@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import SearchInput from '@/shared-components/searchInput/SearchInput.vue'
 import SectionView from './components/ListFavoredSection/views/SectionView.vue'
+import { useCreateModal } from '@/stores/createModal/createModal.store';
+const createModalStore = useCreateModal()
 </script>
 
 <template>
@@ -8,7 +10,7 @@ import SectionView from './components/ListFavoredSection/views/SectionView.vue'
     <section class="favored-section">
       <div class="favoreds">
         <h1>Seus Favorecidos</h1>
-        <v-btn icon>
+        <v-btn icon @click="createModalStore.toggleOpen">
           <slot name="icon"><i class="fa-solid fa-plus"></i></slot>
         </v-btn>
       </div>
