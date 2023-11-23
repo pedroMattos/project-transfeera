@@ -1,12 +1,25 @@
 <script lang="ts" setup>
 import ListFavoredController from '../controller/listFavored.controller'
+import { useSelectToDelete } from '@/stores/selectToDelete/selectToDelete.store'
+import { TableViewModel } from '../viewModel'
 import PaginationTable from '@/shared-components/paginationTable/paginationTable.vue'
 import StatusFavored from '@/shared-components/statusFavored/statusFavored.vue'
 import BankIcon from "@/shared-components/bankIcon/bankIcon.vue"
+import { computed, onMounted } from 'vue'
 
-const tableData = new ListFavoredController().getAll()
+const tableData = computed(() => new ListFavoredController().getAll())
+const viewModel = new TableViewModel()
+const selectStore = useSelectToDelete()
+
+onMounted(() => {
+  selectStore.setTotalItems(tableData.value?.length)
+})
 
 const TABLE_HEADER_TITLES = ['Favorecido', 'CPF/CNPJ', 'Banco', 'Agência', 'CC', 'Status do favorecido']
+const listOfSelecteds = computed(() => {
+  return selectStore.selecteds
+})
+
 </script>
 
 <template>
@@ -14,13 +27,21 @@ const TABLE_HEADER_TITLES = ['Favorecido', 'CPF/CNPJ', 'Banco', 'Agência', 'CC'
     <thead>
       <tr>
         <th v-for="(title, index) in TABLE_HEADER_TITLES" :key="index" class="text-left">
+          <input v-if="index === 0" type="checkbox" @change="() => viewModel.selectAll(tableData)">
           {{ title }}
         </th>
       </tr>
     </thead>
     <tbody>
       <tr v-for="(receiver, index) in tableData" :key="index">
-        <td>{{ receiver.name }}</td>
+        <td>
+          <input
+            type="checkbox"
+            v-model="listOfSelecteds"
+            @click="() => viewModel.selectFavored(receiver.id)"
+            :value="receiver.id">
+          {{ receiver.name }}
+        </td>
         <td>{{ receiver.uniqueIdentifyPFPJ }}</td>
         <td><bank-icon /></td>
         <td>{{ receiver.branch }}</td>
