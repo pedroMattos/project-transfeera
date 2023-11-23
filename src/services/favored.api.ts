@@ -11,7 +11,6 @@ export default class FavoredApi {
   getReceivers() {
     // const endpoint = 'my/endpoint'
     const response = {
-        "status": 200,
         "receivers": [
           {
             "id": "0accb825-db24-4288-9f29-c88b9ec656da",
@@ -48,14 +47,12 @@ export default class FavoredApi {
         ]
     }
 
-    if (response.status === 200) {
-      const receivers = response.receivers
+    const receivers = response.receivers
 
-      return receivers.map((receiver: TransactionData) => {
-        const receiverData = new TableDataDto(receiver).data
+    return receivers.map((receiver: TransactionData) => {
+      const receiverData = new TableDataDto(receiver).data
 
-        return receiverData
-      })
-    }
+      return receiverData
+    })
   }
 }
