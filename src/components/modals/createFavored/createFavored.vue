@@ -2,8 +2,7 @@
 import { useCreateModal } from '@/stores/createModal/createModal.store';
 import TextField from '@/shared-components/textField/textField.vue'
 import buttonApp from '@/shared-components/buttons/buttonApp/buttonApp.vue';
-import { computed, ref } from 'vue';
-import type { FavoredData } from '@/types/favored';
+import { computed } from 'vue';
 
 const modalStore = useCreateModal()
 const createModalStore = useCreateModal()
