@@ -1,7 +1,7 @@
 import type { TransactionData } from "@/types/transaction"
 
 export default class TableDataDto {
-	private readonly _transaction: TransactionData
+	private _transaction: TransactionData
 
 	constructor(transaction: TransactionData) {
 		this._transaction = transaction
