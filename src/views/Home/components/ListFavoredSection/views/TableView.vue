@@ -5,11 +5,16 @@ import { TableViewModel } from '../viewModel'
 import PaginationTable from '@/shared-components/paginationTable/paginationTable.vue'
 import StatusFavored from '@/shared-components/statusFavored/statusFavored.vue'
 import BankIcon from "@/shared-components/bankIcon/bankIcon.vue"
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, onBeforeMount, ref } from 'vue'
+import { type FavoredTableData } from '@/types/favored'
 
-const tableData = computed(() => new ListFavoredController().getAll())
+const tableData = ref<FavoredTableData[]>()
 const viewModel = new TableViewModel()
 const selectStore = useSelectToDelete()
+
+onBeforeMount(() => {
+  getAll()
+})
 
 onMounted(() => {
   selectStore.setTotalItems(tableData.value?.length)
@@ -20,6 +25,16 @@ const listOfSelecteds = computed(() => {
   return selectStore.selecteds
 })
 
+async function getAll() {
+  tableData.value = await new ListFavoredController().getAll()
+}
+
+function handleSelectAll() {
+  if (tableData.value !== undefined) {
+    viewModel.selectAll(tableData.value);
+  }
+}
+
 </script>
 
 <template>
@@ -27,13 +42,13 @@ const listOfSelecteds = computed(() => {
     <thead>
       <tr>
         <th v-for="(title, index) in TABLE_HEADER_TITLES" :key="index" class="text-left">
-          <input v-if="index === 0" type="checkbox" @change="() => viewModel.selectAll(tableData)">
+          <input v-if="index === 0" type="checkbox" @change="handleSelectAll">
           {{ title }}
         </th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(receiver, index) in tableData" :key="index">
+      <tr v-for="(receiver, index) in tableData" :key="index" @click="() => viewModel.openDetailsModal(receiver)">
         <td>
           <input
             type="checkbox"
