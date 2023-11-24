@@ -1,12 +1,12 @@
 import FavoredApi from "@/services/favored.api"
 
 export default class ListFavoredController {
-  readonly $_repository
+  readonly repository
   constructor() {
-    this.$_repository = new FavoredApi()
+    this.repository = new FavoredApi()
   }
 
-  getAll() {
-    return this.$_repository.getReceivers()
+  async getAll() {
+    return await this.repository.getReceivers()
   }
 }
