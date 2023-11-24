@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import HeaderApp from '@/components/header/index.vue'
 import CreateFavoredModal from '@/components/modals/createFavored/createFavored.vue'
+import DetailsReceiver from '@/components/modals/detailsReceiver/detailsReceiver.vue'
 </script>
 
 <template>
@@ -9,6 +10,7 @@ import CreateFavoredModal from '@/components/modals/createFavored/createFavored.
     <slot></slot>
 
     <create-favored-modal />
+    <details-receiver />
   </section>
 </template>
 
