@@ -9,7 +9,7 @@ export default class HeaderViewModel {
 	}
 
     getHeaderLinks() {
-        const headerLinks = [new HeaderLinkDto('Seus favorecidos', '/clients')]
+        const headerLinks = [new HeaderLinkDto('Seus favorecidos', '/')]
 
         return headerLinks
     }
