@@ -22,8 +22,6 @@ export class TableViewModel {
   selectAll(favoreds: FavoredTableData[]) {
     if (favoreds) {
       this._selectStore.setSelecteds(favoreds.map((favored: FavoredTableData) => favored.id))
-    } else {
-      console.log('teste')
     }
   }
 
@@ -31,6 +29,7 @@ export class TableViewModel {
     if (data.status === Status.RASCUNHO) {
       console.log('abri rascunho')
     } else if (data.status === Status.VALIDADO) {
+      useDetailsModal().setModalData(data.id)
       useDetailsModal().toggleOpen()
     }
   }
