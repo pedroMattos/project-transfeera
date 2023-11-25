@@ -8,15 +8,15 @@ export class ValidateModalController {
     this.repository = new ApiRepository('http://localhost:3000')
   }
   
-  delete(id: string) {
-    this.repository.remove(id)
+  async delete(id: string) {
+    await this.repository.remove(id)
   }
 
   getReceiver(id: string) {
     return this.repository.getOne(id)
   }
 
-  savePatch(id: string, params: PatchParamsValidate) {
-    this.repository.update(id, { ...params })
+  async savePatch(id: string, params: PatchParamsValidate) {
+    await this.repository.update(id, { ...params })
   }
 }
