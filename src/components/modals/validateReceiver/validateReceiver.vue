@@ -6,7 +6,6 @@ import { useValidateModal } from '../../../stores/validateModal/validateModal.st
 import StatusFavored from '../../../shared-components/statusFavored/statusFavored.vue';
 import TextField from '../../../shared-components/textField/textField.vue';
 import SelectField from '../../../shared-components/selectField/selectField.vue';
-import { onMounted } from 'vue';
 
 const modalStore = useValidateModal()
 const modalIsdOpen = computed(() => modalStore.isOpen)
@@ -18,15 +17,6 @@ const selectOptions = [
   { value: 'email', text: 'E-mail' },
 ]
 
-
-const savedPixKey = ref<string | undefined>()
-const savedPixKeyType = ref<string | undefined>()
-const pixKeyselected = ref<string>()
-
-onMounted(() => {
-  savedPixKey.value = modalData.value?.pix_key
-  savedPixKeyType.value = modalData.value?.pix_key_type
-})
 </script>
 <template>
   <v-dialog
