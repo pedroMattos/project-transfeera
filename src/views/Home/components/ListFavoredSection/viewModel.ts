@@ -36,7 +36,7 @@ export class TableViewModel {
     }
   }
 
-  openDeleteModal() {
-    useDeleteFavoredModal().openModal()
+  openDeleteModal(selecteds: string[]) {
+    useDeleteFavoredModal().openModal(selecteds)
   }
 }
