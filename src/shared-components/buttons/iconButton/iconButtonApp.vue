@@ -2,7 +2,6 @@
 import type { Theme } from '@/types/buttons'
 import ButtonViewModel from '../viewModel'
 defineProps<{
-  label: string,
   theme: Theme,
   disabled?: boolean
 }>()
@@ -11,8 +10,8 @@ const viewModel = new ButtonViewModel()
 </script>
 
 <template>
-  <v-btn :variant="viewModel.getTheme(theme)" :class="viewModel.getThemeClass(theme)" :disabled="disabled">
-    {{ label }}
+  <v-btn :variant="viewModel.getTheme(theme)" icon :class="viewModel.getThemeClass(theme)" :disabled="disabled">
+    <slot></slot>
   </v-btn>
 </template>
 
@@ -24,7 +23,9 @@ const viewModel = new ButtonViewModel()
     font-weight: 400;
     line-height: normal;
     padding: 17px 15px;
-    min-width: 150px;
+    max-width: 62px;
+    min-width: 62px;
+    border-radius: 4px;
     &.warn-btn {
       background-color: var(--red-100);
       height: unset;
