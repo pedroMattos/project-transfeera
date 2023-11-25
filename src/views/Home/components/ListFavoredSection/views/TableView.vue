@@ -5,32 +5,43 @@ import { TableViewModel } from '../viewModel'
 import PaginationTable from '@/shared-components/paginationTable/paginationTable.vue'
 import StatusFavored from '@/shared-components/statusFavored/statusFavored.vue'
 import BankIcon from "@/shared-components/bankIcon/bankIcon.vue"
-import { computed, onMounted, onBeforeMount, ref } from 'vue'
+import { computed, onMounted, onBeforeMount, ref, watch } from 'vue'
 import { type FavoredTableData } from '@/types/favored'
+import { useRefetch } from '@/stores/refetch'
 
+const TABLE_HEADER_TITLES = ['Favorecido', 'CPF/CNPJ', 'Banco', 'Agência', 'CC', 'Status do favorecido']
 const tableData = ref<FavoredTableData[]>()
 const viewModel = new TableViewModel()
 const selectStore = useSelectToDelete()
+const currentPage = ref<number>(1)
+const refetch = useRefetch()
 const totalPages = localStorage.getItem('totalPages')
+const startRefetch = computed(() => refetch.refetch)
+const reativeTableData = computed(() => tableData.value)
 
 onBeforeMount(() => {
   getAll()
+})
+
+watch(startRefetch, (value) => {
+  if (value) getAll()
 })
 
 onMounted(() => {
   selectStore.setTotalItems(tableData.value?.length)
 })
 
-const TABLE_HEADER_TITLES = ['Favorecido', 'CPF/CNPJ', 'Banco', 'Agência', 'CC', 'Status do favorecido']
 const listOfSelecteds = computed(() => {
   return selectStore.selecteds
 })
 
 async function getAll() {
-  tableData.value = await new ListFavoredController().getAll(1)
+  tableData.value = await new ListFavoredController().getAll(currentPage.value)
+  refetch.stopRefetch()
 }
 
 async function handleChangePage(page: number) {
+  currentPage.value = page
   tableData.value = await new ListFavoredController().getAll(page)
 }
 
@@ -43,7 +54,7 @@ function handleSelectAll() {
 </script>
 
 <template>
-  <v-table density="compact" hover>
+  <v-table v-if="!startRefetch" density="compact" hover>
     <thead>
       <tr>
         <th v-for="(title, index) in TABLE_HEADER_TITLES" :key="index" class="text-left">
@@ -53,7 +64,7 @@ function handleSelectAll() {
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(receiver, index) in tableData" :key="index" @click="() => viewModel.openDetailsModal(receiver)">
+      <tr v-for="(receiver, index) in reativeTableData" :key="index" @click="() => viewModel.openDetailsModal(receiver)">
         <td>
           <input
             type="checkbox"
@@ -70,6 +81,7 @@ function handleSelectAll() {
       </tr>
     </tbody>
   </v-table>
+  <v-progress-circular v-else indeterminate :size="50"></v-progress-circular>
 
   <pagination-table v-if="totalPages" :pages="totalPages" @page-change="handleChangePage" />
   <p class="center">
