@@ -58,7 +58,7 @@ function handleSelectAll() {
           {{ receiver.name }}
         </td>
         <td>{{ receiver.uniqueIdentifyPFPJ }}</td>
-        <td><bank-icon /></td>
+        <td><bank-icon :name="receiver.bank" /></td>
         <td>{{ receiver.branch }}</td>
         <td>{{ receiver.account }}</td>
         <td><status-favored :status="receiver.status" /></td>
