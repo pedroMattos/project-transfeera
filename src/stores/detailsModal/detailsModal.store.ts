@@ -2,23 +2,27 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import type { TransactionData } from '@/types/transaction'
 import { DetailsModalController } from './detailsModal.controller'
+import { useRefetch } from '../refetch'
 
 export const useDetailsModal = defineStore('details-modal', () => {
  const modalData = ref<TransactionData>()
  const isOpen = ref<boolean>(false)
+ const refetch = useRefetch()
  const controller = new DetailsModalController()
  const isLoading = ref<boolean>(true)
 
  const toggleOpen = () => isOpen.value = !isOpen.value
 
 
- function saveData(id: string, email: string) {
-  controller.savePatch(id, email)
+ async function saveData(id: string, email: string) {
+  await controller.savePatch(id, email)
+  refetch.doARefetch()
   toggleOpen()
  }
 
- function deleteReceiver(id: string) {
-  controller.delete(id)
+ async function deleteReceiver(id: string) {
+  await controller.delete(id)
+  refetch.doARefetch()
   toggleOpen()
  }
 

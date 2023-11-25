@@ -7,15 +7,15 @@ export class DetailsModalController {
     this.repository = new ApiRepository('http://localhost:3000')
   }
   
-  delete(id: string) {
-    this.repository.remove(id)
+  async delete(id: string) {
+    await this.repository.remove(id)
   }
 
   getReceiver(id: string) {
     return this.repository.getOne(id)
   }
 
-  savePatch(id: string, email: string) {
-    this.repository.update(id, { email })
+  async savePatch(id: string, email: string) {
+    await this.repository.update(id, { email })
   }
 }
