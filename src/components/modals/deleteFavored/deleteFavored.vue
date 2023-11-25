@@ -6,10 +6,13 @@ import useDeleteFavoredModal from '../../../stores/deleteModal/deleteModal.store
 
 const modalStore = useDeleteFavoredModal()
 const modalIsdOpen = computed(() => modalStore.modalIsdOpen)
+const selecteds = computed(() => modalStore.selecteds)
+const modalText = computed(() =>  modalStore.modalText)
 
 </script>
 <template>
   <v-dialog
+    width="635"
     v-model="modalIsdOpen"
   >
     <v-card>
@@ -20,7 +23,7 @@ const modalIsdOpen = computed(() => modalStore.modalIsdOpen)
         </v-btn>
       </v-toolbar>
       <p class="title">Excluir favorecido</p>
-      <p>Você confirma a exclusão do favorecido X?</p>
+      <p>{{ modalText }}</p>
       <br/>
       <p>O Histórico de pagamentos para este favorecido será mantido, mas ele será removido da sua lista
         de favorecidos.
@@ -28,7 +31,7 @@ const modalIsdOpen = computed(() => modalStore.modalIsdOpen)
 
       <div class="actions">
         <button-app label="Cancelar" theme="outlined" @click="modalStore.cancelDelete" />
-        <button-app label="Confirmar exclusão" theme="danger" @click="modalStore.confirmDelete" />
+        <button-app label="Confirmar exclusão" theme="danger" @click="modalStore.confirmDelete(selecteds)" />
       </div>
     </v-card>
   </v-dialog>
