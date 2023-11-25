@@ -2,6 +2,7 @@
 import { computed } from 'vue';
 
 import buttonApp from '@/shared-components/buttons/buttonApp/buttonApp.vue';
+import IconButtonApp from '@/shared-components/buttons/iconButton/iconButtonApp.vue';
 import { useDetailsModal } from '../../../stores/detailsModal/detailsModal.store';
 import StatusFavored from '@/shared-components/statusFavored/statusFavored.vue';
 import TextField from '@/shared-components/textField/textField.vue';
@@ -58,8 +59,12 @@ const isLoading = computed(() => modalStore.isLoading)
   
   
         <div class="actions">
-          <button-app label="Voltar" theme="outlined" @click="modalStore.toggleOpen" />
-          <button-app label="Exclusão" theme="danger" @click="() => modalData && modalStore.deleteReceiver(modalData.id)" />
+          <div class="first">
+            <button-app label="Voltar" theme="outlined" @click="modalStore.toggleOpen" />
+          </div>
+          <icon-button-app theme="danger" @click="() => modalData && modalStore.deleteReceiver(modalData.id)">
+            <i class="fa-solid fa-trash"></i>
+          </icon-button-app>
           <button-app label="Salvar" theme="primary" @click="() => modalData && modalStore.saveData(modalData.id, modalData?.email)" />
         </div>
       </div>
@@ -100,5 +105,9 @@ const isLoading = computed(() => modalStore.isLoading)
     display: flex;
     justify-content: space-between;
     margin-top: 80px;
+    gap: 20px;
+    .first {
+      flex: 1;
+    }
   }
 </style>

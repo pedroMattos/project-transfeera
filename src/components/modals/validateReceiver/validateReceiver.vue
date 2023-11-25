@@ -6,6 +6,7 @@ import { useValidateModal } from '../../../stores/validateModal/validateModal.st
 import StatusFavored from '../../../shared-components/statusFavored/statusFavored.vue';
 import TextField from '../../../shared-components/textField/textField.vue';
 import SelectField from '../../../shared-components/selectField/selectField.vue';
+import IconButtonApp from '@/shared-components/buttons/iconButton/iconButtonApp.vue';
 
 const modalStore = useValidateModal()
 const modalIsdOpen = computed(() => modalStore.isOpen)
@@ -44,6 +45,7 @@ const selectOptions = [
               type="text"
               label="Qual o nome completo ou razão social do favorecido?"
               @update:model="(value?: string) => modalData.name = value as string" />
+              <br>
             <text-field
               v-if="modalData?.email"
               :value="modalData.email"
@@ -52,6 +54,7 @@ const selectOptions = [
               label="Qual o e-mail para o envio do comprovante?"
               @update:model="(value?: string) => modalData.email = value as string" />
           </v-col>
+          
           <v-col cols="12" sm="6">
             <text-field
               v-if="modalData?.tax_id"
@@ -74,6 +77,7 @@ const selectOptions = [
               :options="selectOptions" :value="modalData?.pix_key_type"
               @change:model="(value) => modalData.pix_key_type = value"
               />
+              <br>
               <text-field
                 v-if="modalData?.pix_key"
                 :value="modalData.pix_key"
@@ -85,8 +89,12 @@ const selectOptions = [
           </v-row>
   
         <div class="actions">
-          <button-app label="Voltar" theme="outlined" @click="modalStore.toggleOpen" />
-          <button-app label="Exclusão" theme="danger" @click="() => modalData && modalStore.deleteReceiver(modalData.id)" />
+          <div class="first">
+            <button-app label="Voltar" theme="outlined" @click="modalStore.toggleOpen" />
+          </div>
+          <icon-button-app theme="danger" @click="() => modalData && modalStore.deleteReceiver(modalData.id)">
+            <i class="fa-solid fa-trash"></i>
+          </icon-button-app>
           <button-app label="Salvar" theme="primary" @click="() => modalData && modalStore.saveData(modalData.id, modalData)" />
         </div>
     </v-card>
@@ -109,5 +117,9 @@ const selectOptions = [
     display: flex;
     justify-content: space-between;
     margin-top: 80px;
+    gap: 20px;
+    .first {
+      flex: 1;
+    }
   }
 </style>
