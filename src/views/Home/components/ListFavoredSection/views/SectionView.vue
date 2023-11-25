@@ -18,7 +18,7 @@ const selecteds = computed(() => selectedStore.selecteds)
       label="Excluir selecionados"
       theme="warn"
       :disabled="!selecteds.length"
-      @click="viewModel.openDeleteModal"
+      @click="() => viewModel.openDeleteModal(selecteds)"
     />
     <table-view />
     <delete-favored-modal />
