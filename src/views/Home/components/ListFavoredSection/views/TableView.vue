@@ -53,7 +53,7 @@ function handleSelectAll() {
           <input
             type="checkbox"
             v-model="listOfSelecteds"
-            @click="() => viewModel.selectFavored(receiver.id)"
+            @click.stop="() => viewModel.selectFavored(receiver.id)"
             :value="receiver.id">
           {{ receiver.name }}
         </td>
