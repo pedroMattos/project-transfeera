@@ -16,3 +16,18 @@ export interface TransactionData {
 }
 
 export type Status = 'validado' | 'rascunho'
+
+export type PatchParamsValidate = {
+  name: string,
+  tax_id: string,
+  email: string,
+  status: 'rascunho',
+  pix_key: string,
+  pix_key_type: 'aleatoria' | 'cpf' | 'cnpj' | 'email',
+  branch: string,
+  bank_name: string,
+  bank_code: string,
+  account: string,
+  account_type: 'Conta Corrent' | 'Conta Poupança',
+  updated_at: string
+}
