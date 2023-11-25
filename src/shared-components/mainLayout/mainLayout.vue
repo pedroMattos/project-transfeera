@@ -2,6 +2,7 @@
 import HeaderApp from '@/components/header/index.vue'
 import CreateFavoredModal from '@/components/modals/createFavored/createFavored.vue'
 import DetailsReceiver from '@/components/modals/detailsReceiver/detailsReceiver.vue'
+import ValidateReceiver from '@/components/modals/validateReceiver/validateReceiver.vue'
 </script>
 
 <template>
@@ -11,6 +12,7 @@ import DetailsReceiver from '@/components/modals/detailsReceiver/detailsReceiver
 
     <create-favored-modal />
     <details-receiver />
+    <validate-receiver />
   </section>
 </template>
 
