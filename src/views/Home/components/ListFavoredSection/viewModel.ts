@@ -2,6 +2,7 @@ import { useSelectToDelete } from "@/stores/selectToDelete/selectToDelete.store"
 import useDeleteFavoredModal from "@/stores/deleteModal/deleteModal.store";
 import type { FavoredTableData } from "@/types/favored";
 import { useDetailsModal } from "@/stores/detailsModal/detailsModal.store";
+import { useValidateModal } from "@/stores/validateModal/validateModal.store";
 
 enum Status {
   RASCUNHO = 'rascunho',
@@ -27,7 +28,8 @@ export class TableViewModel {
 
   openDetailsModal(data: FavoredTableData) {
     if (data.status === Status.RASCUNHO) {
-      console.log('abri rascunho')
+      useValidateModal().setModalData(data.id)
+      useValidateModal().toggleOpen()
     } else if (data.status === Status.VALIDADO) {
       useDetailsModal().setModalData(data.id)
       useDetailsModal().toggleOpen()
