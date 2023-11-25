@@ -20,7 +20,10 @@ export class ApiRepository implements Operations<ResponseData> {
 
   async getAll(page: number = 1): Promise<ResponseData[]> {
     try {
-      const response = await this._axiosInstance.get<ResponseData[]>(`/receivers?_page=${page}&_limit=5`);
+      const perPage = 5
+      const response = await this._axiosInstance.get<ResponseData[]>(`/receivers?_page=${page}&_limit=${perPage}`);
+      const totalPages = Math.ceil(response.headers['x-total-count'] / perPage)
+      localStorage.setItem('totalPages', totalPages.toString())
       return this.handleResponse(response);
     } catch (error) {
       if (axios.isAxiosError(error)) {
