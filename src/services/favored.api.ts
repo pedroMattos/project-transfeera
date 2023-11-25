@@ -9,8 +9,8 @@ export default class FavoredApi {
     this._API = new ApiRepository('http://localhost:3000')
   }
 
-  async getReceivers() {
-    const response = await this._API.getAll()
+  async getReceivers(page: number) {
+    const response = await this._API.getAll(page)
     const receivers = response
 
     return receivers.map((receiver: TransactionData) => {
