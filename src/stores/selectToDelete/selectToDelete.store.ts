@@ -11,7 +11,6 @@ export const useSelectToDelete = defineStore('select-to-delete', () => {
   }
 
   function setSelecteds(payload: string[]) {
-    console.log(totalItems.value, selecteds.value.length)
     if (totalItems.value && totalItems.value === selecteds.value.length) {
       selecteds.value = []
       return
