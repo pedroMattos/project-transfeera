@@ -71,7 +71,6 @@ const selectOptions = [
           <v-row no-gutters>
             <v-col cols="12" sm="6">
               <select-field
-              v-if="modalData?.pix_key_type"
               label="Tipo de chave"
               name-field="key_type"
               :options="selectOptions" :value="modalData?.pix_key_type"
@@ -79,8 +78,7 @@ const selectOptions = [
               />
               <br>
               <text-field
-                v-if="modalData?.pix_key"
-                :value="modalData.pix_key"
+                :value="modalData?.pix_key"
                 placeholder="Chave pix"
                 :type="modalData?.pix_key_type === 'email' ? 'email' : 'text'"
                 label="Chave"

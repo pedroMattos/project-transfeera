@@ -54,7 +54,7 @@ function handleSelectAll() {
 </script>
 
 <template>
-  <v-table v-if="!startRefetch" density="compact" hover>
+  <v-table density="compact" hover>
     <thead>
       <tr>
         <th v-for="(title, index) in TABLE_HEADER_TITLES" :key="index" class="text-left">
@@ -81,7 +81,6 @@ function handleSelectAll() {
       </tr>
     </tbody>
   </v-table>
-  <v-progress-circular v-else indeterminate :size="50"></v-progress-circular>
 
   <pagination-table v-if="totalPages" :pages="totalPages" @page-change="handleChangePage" />
   <p class="center">
