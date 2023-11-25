@@ -11,6 +11,7 @@ import { type FavoredTableData } from '@/types/favored'
 const tableData = ref<FavoredTableData[]>()
 const viewModel = new TableViewModel()
 const selectStore = useSelectToDelete()
+const totalPages = localStorage.getItem('totalPages')
 
 onBeforeMount(() => {
   getAll()
@@ -26,7 +27,11 @@ const listOfSelecteds = computed(() => {
 })
 
 async function getAll() {
-  tableData.value = await new ListFavoredController().getAll()
+  tableData.value = await new ListFavoredController().getAll(1)
+}
+
+async function handleChangePage(page: number) {
+  tableData.value = await new ListFavoredController().getAll(page)
 }
 
 function handleSelectAll() {
@@ -66,7 +71,7 @@ function handleSelectAll() {
     </tbody>
   </v-table>
 
-  <pagination-table :pages="1" @page-change="console.log" />
+  <pagination-table v-if="totalPages" :pages="totalPages" @page-change="handleChangePage" />
   <p class="center">
     <img src="../../../../../assets/transfeera-logo-mini.png">
   </p>

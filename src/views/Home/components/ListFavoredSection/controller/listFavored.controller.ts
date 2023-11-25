@@ -6,7 +6,11 @@ export default class ListFavoredController {
     this.repository = new FavoredApi()
   }
 
-  async getAll() {
-    return await this.repository.getReceivers()
+  async getAll(page: number) {
+    return await this.repository.getReceivers(page)
+  }
+  
+  async changePage(page: number) {
+    return await this.repository.getReceivers(page)
   }
 }
