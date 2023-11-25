@@ -1,13 +1,18 @@
 <script setup lang="ts">
 import { useFormat } from '@/composables/useFormat';
 import { ref } from 'vue'
-defineProps<{
+const props = defineProps<{
   placeholder?: string,
   type?: 'email' | 'text',
-  label?: string
+  label?: string,
+  value?: string
 }>()
 
-const fieldValue = ref<string>('')
+const emit = defineEmits<{
+  (event: 'update:model', value: string | undefined): void
+}>()
+
+const fieldValue = ref<string | undefined>(props.value)
 </script>
 
 <template>
@@ -25,7 +30,7 @@ const fieldValue = ref<string>('')
       v-model="fieldValue"
       rounded="5"
       hide-details
-      @update:modelValue="useFormat().cnpjCpf"
+      @update:modelValue="emit('update:model', fieldValue)"
     />
   </div>
 </template>
