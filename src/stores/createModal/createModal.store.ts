@@ -2,9 +2,12 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import type { FavoredData } from '@/types/favored'
 import { CreateModalDto } from './createModal.dto'
+import { CreateModalController } from './createModal.controller'
+import type { TransactionData } from '@/types/transaction'
 
 export const useCreateModal = defineStore('create-modal', () => {
   const empty = new CreateModalDto({})
+  const controller = new CreateModalController()
   const isOpen = ref<boolean>(false)
   const modalData = ref<FavoredData>(empty)
 
@@ -16,5 +19,10 @@ export const useCreateModal = defineStore('create-modal', () => {
     isOpen.value = !isOpen.value
   }
 
-  return { isOpen, setModaData, toggleOpen }
+  function save(data: TransactionData) {
+    controller.save(data)
+    toggleOpen()
+  }
+
+  return { isOpen, setModaData, toggleOpen, empty, save }
 })
