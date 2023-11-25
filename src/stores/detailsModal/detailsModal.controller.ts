@@ -11,6 +11,10 @@ export class DetailsModalController {
     this.repository.remove(id)
   }
 
+  getReceiver(id: string) {
+    return this.repository.getOne(id)
+  }
+
   savePatch(id: string, email: string) {
     this.repository.update(id, { email })
   }
