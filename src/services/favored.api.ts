@@ -11,7 +11,18 @@ export default class FavoredApi {
 
   async getReceivers(page: number) {
     const response = await this._API.getAll(page)
-    const receivers = response
+    const receivers = response.reverse()
+
+    return receivers.map((receiver: TransactionData) => {
+      const receiverData = new TableDataDto(receiver).data
+
+      return receiverData
+    })
+  }
+
+  async search(term: string) {
+    const response = await this._API.search(term)
+    const receivers = response.reverse()
 
     return receivers.map((receiver: TransactionData) => {
       const receiverData = new TableDataDto(receiver).data
