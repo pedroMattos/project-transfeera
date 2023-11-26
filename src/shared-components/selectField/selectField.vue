@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, defineEmits } from 'vue'
+import { ref } from 'vue'
 type selectType = {
   value: string,
   text: string
