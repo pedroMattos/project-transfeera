@@ -1,46 +1,56 @@
-# project-transfeera
 
-This template should help get you started developing with Vue 3 in Vite.
+# Teste de front da Transfeera
 
-## Recommended IDE Setup
+Projeto que tem a função de editar, criar, atualizar e excluir dados dispostos em um json que são acessados e manipulados pela interface.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Funcionalidades
 
-## Type Support for `.vue` Imports in TS
+- Atualizar ao clicar em um item da tabela
+- Excluir um ou muitos
+- Criar novo
+- Buscar dados
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+## Instalação
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+Instale o json server no seu computador
+```bash
+  npm install -g json-server
+```
+    
+## Rodando localmente
 
-## Customize configuration
+Clone o projeto
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
+```bash
+  git clone https://github.com/pedroMattos/project-transfeera.git
 ```
 
-### Compile and Hot-Reload for Development
+Entre no diretório do projeto
 
-```sh
-npm run dev
+```bash
+  cd project-transfeera
 ```
 
-### Type-Check, Compile and Minify for Production
+Instale as dependências
 
-```sh
-npm run build
+```bash
+  npm install
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+Inicie o servidor do Json server
 
-```sh
-npm run lint
+```bash
+  json-server --watch api.json
 ```
+
+Inicie o projeto
+
+```bash
+  npm run dev
+```
+
+Acesse o projeto no seu navegador: http://localhost:5173/
+
+Ou no link que for disponibilizado ao rodar o projeto
+
