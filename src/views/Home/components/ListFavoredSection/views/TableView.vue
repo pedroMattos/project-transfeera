@@ -5,12 +5,14 @@ import { TableViewModel } from '../viewModel'
 import PaginationTable from '@/shared-components/paginationTable/paginationTable.vue'
 import StatusFavored from '@/shared-components/statusFavored/statusFavored.vue'
 import BankIcon from "@/shared-components/bankIcon/bankIcon.vue"
-import { computed, onMounted, onBeforeMount, ref, watch } from 'vue'
+import { computed, onBeforeMount, ref, watch } from 'vue'
 import { type FavoredTableData } from '@/types/favored'
 import { useRefetch } from '@/stores/refetch'
+import { useSearch } from '@/stores/search'
 
 const TABLE_HEADER_TITLES = ['Favorecido', 'CPF/CNPJ', 'Banco', 'Agência', 'CC', 'Status do favorecido']
 const tableData = ref<FavoredTableData[]>()
+  const searchStore = useSearch()
 const viewModel = new TableViewModel()
 const selectStore = useSelectToDelete()
 const currentPage = ref<number>(1)
@@ -18,6 +20,7 @@ const refetch = useRefetch()
 const totalPages = localStorage.getItem('totalPages')
 const startRefetch = computed(() => refetch.refetch)
 const reativeTableData = computed(() => tableData.value)
+const reactiveSearch = computed(() => searchStore.searchData)
 
 onBeforeMount(() => {
   getAll()
@@ -27,8 +30,9 @@ watch(startRefetch, (value) => {
   if (value) getAll()
 })
 
-onMounted(() => {
-  selectStore.setTotalItems(tableData.value?.length)
+watch(reactiveSearch, (value) => {
+  if (value) tableData.value = value
+  else getAll()
 })
 
 const listOfSelecteds = computed(() => {
@@ -37,6 +41,7 @@ const listOfSelecteds = computed(() => {
 
 async function getAll() {
   tableData.value = await new ListFavoredController().getAll(currentPage.value)
+  selectStore.setTotalItems(tableData.value?.length)
   refetch.stopRefetch()
 }
 
