@@ -3,16 +3,17 @@ import HeaderApp from '@/components/header/index.vue'
 import CreateFavoredModal from '@/components/modals/createFavored/createFavored.vue'
 import DetailsReceiver from '@/components/modals/detailsReceiver/detailsReceiver.vue'
 import ValidateReceiver from '@/components/modals/validateReceiver/validateReceiver.vue'
+import SnackbarApp from '../../components/snackbar/snackbarApp.vue'
 </script>
 
 <template>
   <section class="main-app">
     <header-app /> 
     <slot></slot>
-
     <create-favored-modal />
     <details-receiver />
     <validate-receiver />
+    <snackbar-app />
   </section>
 </template>
 
