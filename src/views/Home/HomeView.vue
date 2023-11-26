@@ -2,7 +2,21 @@
 import SearchInput from '@/shared-components/searchInput/SearchInput.vue'
 import SectionView from './components/ListFavoredSection/views/SectionView.vue'
 import { useCreateModal } from '@/stores/createModal/createModal.store';
+import { useSearch } from '../../stores/search';
+import ListFavoredController from './components/ListFavoredSection/controller/listFavored.controller';
+import debounce from 'debounce';
 const createModalStore = useCreateModal()
+const searchStore = useSearch()
+const controller = new ListFavoredController()
+
+function handleSearch(value?: string) {
+  const debouncer = debounce(async () => {
+    const data = await controller.search(value as string)
+    searchStore.setSearchData(data)
+  }, 500)
+
+  debouncer()
+}
 </script>
 
 <template>
@@ -14,7 +28,7 @@ const createModalStore = useCreateModal()
           <slot name="icon"><i class="fa-solid fa-plus"></i></slot>
         </v-btn>
       </div>
-      <search-input placeholder="Nome, CPF, agência ou conta" />
+      <search-input placeholder="Nome, CPF, agência ou conta" @update:model="handleSearch" />
     </section>
 
     <section-view />
