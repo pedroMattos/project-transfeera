@@ -1,7 +1,13 @@
 <script setup lang="ts">
-defineProps<{
+import { ref } from 'vue'
+const props = defineProps<{
   placeholder: string,
+  value?: string
 }>()
+const emit = defineEmits<{
+  (event: 'update:model', value: string | undefined): void
+}>()
+const fieldValue = ref<string | undefined>(props.value)
 </script>
 
 <template>
@@ -15,6 +21,8 @@ defineProps<{
       single-line
       rounded="5"
       hide-details
+      v-model="fieldValue"
+      @update:modelValue="emit('update:model', fieldValue)"
     >
       <slot name="append-inner-icon">
         <i class="fa-solid fa-magnifying-glass"></i>
