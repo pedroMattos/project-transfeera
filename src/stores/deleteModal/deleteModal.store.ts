@@ -1,18 +1,18 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import { DeleteModalController } from './deleteModal.controller'
-import { useRefetch } from '../refetch'
+import { useSelectToDelete } from '../selectToDelete/selectToDelete.store'
 
 const useDeleteFavoredModal = defineStore('delete-favored-modal', () => {
   const modalIsdOpen = ref<boolean>(false)
+  const selectStore = useSelectToDelete()
   const controller = new DeleteModalController()
-  const refetch = useRefetch()
   const selecteds = ref<string[]>([''])
   const modalText = ref<string>('')
 
   function confirmDelete(ids: string[]) {
     controller.delete(ids)
-    
+    selectStore.clear()
     modalIsdOpen.value = false
   }
 
